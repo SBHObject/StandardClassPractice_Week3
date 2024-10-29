@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 //입문주자와 비교할떄 입력방식의 차이
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
 
+    public UnityAction<bool> toggleUI;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,11 +44,22 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    //Move를 FixedUpdate에 구현하는 이유
+    //Update의 경우, 기기의 성능에따라 Update가 호출되는 횟수가 달라짐
+    //이 경우 기기의 성능에따라 캐릭터의 이동 속도가 달라지게 될 수 있음 -> 고성능의 기기가 저성능 기기보다 더 많이 이동함
+    //FixedUpdate는 고정된 횟수만큼만 호출됨 (기본 50 프레임 고정)
+    //이동 호출이 고정되었기때문에 기기 성능이 달라도 같은 거리를 이동하게됨
     private void FixedUpdate()
     {
         Move();
     }
 
+    //CameraLook 을 LateUpdate에 호출하는 이유
+    //Update 종료후 호출됨
+    //캐릭터가 행동한 뒤, 카메라가 이동
+    //카메라가 이동한 뒤, 캐릭터가 행동하게 되면 캐릭터가 카메라를 벗어나게 될 수도 있어서?
+    //카메라가 이동한 뒤, 캐릭터가 행동하면 카메라 위치는 그대로인데 캐릭터는 이동하고 다음 프레임에 캐릭터를 따라가게 될 가능성?
+    //카메라는 언제나 캐릭터 위치에 기반해서 움직임 -> 캐릭터의 움직임이 종료된 후, 그 위치를 기반으로 카메라를 움직여야함
     private void LateUpdate()
     {
         if (canLook)
@@ -79,6 +93,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnOptionInput(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        {
+            toggleUI?.Invoke(canLook);
+            ToggleCursor(canLook);
+        }
+    }
+
     //핵심로직 분석 Move()
     //OnMoveInput 함수에서 WASD가 눌리고 있으면 curMovementInput 에 해당되는 값 저장, 눌리지 않으면 Vector2.zero 값 저장
     //curMovementInput 값의 y값을 사용하여 Vector3의 z값으로 , x 값을 사용하여 Vector3의 x값으로 저장
@@ -107,7 +130,7 @@ public class PlayerController : MonoBehaviour
         camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
         cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
 
-        transform.eulerAngles = new Vector3(0, mouseDelta.x * lookSensitivity, 0);
+        transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
     }
 
     //핵심로직분석 IsGrounded()
