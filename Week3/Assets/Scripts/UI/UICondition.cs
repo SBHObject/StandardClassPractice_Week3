@@ -12,6 +12,7 @@ public class UICondition : MonoBehaviour
     public Condition health;
     public Condition hunger;
     public Condition stamina;
+    public Condition mana;
 
     //별도의 UI 스크립트를 만드는 이유
     //단일책임 원칙을 기반으로, UI 는 UI 관련 스크립트가 책임을 져야한다.
