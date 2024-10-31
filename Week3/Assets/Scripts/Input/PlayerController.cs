@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
     public UnityAction<bool> toggleUI;
 
+    public Action inventory;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -99,6 +101,15 @@ public class PlayerController : MonoBehaviour
         {
             toggleUI?.Invoke(canLook);
             ToggleCursor(canLook);
+        }
+    }
+
+    public void OnInventoryButton(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        {
+            inventory?.Invoke();
+            ToggleCursor(!canLook);
         }
     }
 
