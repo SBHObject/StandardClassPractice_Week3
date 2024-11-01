@@ -94,12 +94,46 @@
 
   1. Interaction 기능의 구조와 핵심 로직을 분석해보세요.
      * 기능구조
-       * 
+       * Update - checkTime 마다 Ray 발사, Physics.Raycast 를통해 IInteractable 획득 시도
+       * SetPromptText - IInteractable을통해 얻은 string값 화면에 표기, 화면에 아이템 설명이 활성화될지 여부 결정
+       * OnInteractInput - InputAsset 을 통해 상호작용에 지정된 입력이 들어오면 해당 IInteractable 의 상호작용 함수 호출
      * 핵심 로직
+       * 지정한 시간마다 카메라 전방으로 Ray를 발사한다.
+       * Ray 에 지정한 레이어의 오브젝트가 검출될경우, 해당 오브젝트의 IInteractable 을 가져온다
+       * IInteractable 인터페이스를 통해서 검출된 오브젝트가 가진 GetInteractPrompt 함수를 가져와서, 반환받은 string 값을 화면에 표기한다.
+       * IInteractable 오브젝트를 가지고있을때 상호작용에 지정한 버튼을 입력하면 해당 상호작용 오브젝트의 상호작용 메서드를 호출한다.
   2. Inventory 기능의 구조와 핵심 로직을 분석해보세요.
      * 기능구조
-       *
+       * Start - 아이템 슬롯을 생성, 인덱스 부여, AddItem 이벤트에 구독
+       * AddItem - Player 획득할 아이템을 인벤토리에 추가
+         * GetItemStack(ItemData data) - 아이템이 중첩 가능할경우 여유가 있는 같은 아이템을 찾아서 해당 슬롯의 카운트 증가
+         * GetEmptySlot() - 중첩 불가능하거나, 중첩할 슬롯이 없을경우 비어있는 슬롯 찾음
+         * 아이템을 획득하지 못한경우 ThrowItem(Itemdata) 호출
+       * ThrowItem - 매개변수의 아이템을 Player의 dropPosition 위치에 생성
+       * SelectItem - ItemSlot 클래스에서 호출, 해당 슬롯의 버튼이 눌리면 선택된 슬롯의 아이템 정보 표기
+       * ClearSelectedItemWindow - 아이템 정보창 초기화, RemoveSelectedItem 에서 호출
+       * OnUseButton - 아이템의 타입이 소모품일경우, 아이템의 consumables에 접근하여 종류에 맞는 효과 발생
+         * Health 일경우 - 체력 회복
+         * Hunger 일 경우 - 포만도 회복
+       * OnDropButton - ThrowItem(selectedItem.item) 과 RemoveSelectedItem() 함수 호출, 아이템을 생성한 후, 인벤토리에서 해당 아이템을 지움
+       * RemoveSelectedItem - 호출될경우 현재 선택한 아이템 슬롯의 중첩값(quantity) 를 1 줄임
+         * quantity 값이 0 이하가 되면 해당 슬롯을 초기화
+       * Toggle - PlayerContoller 으로부터 인벤토리 입력 이벤트를 받아서 활성화, 비활성화
+           
      * 핵심 로직
-       *
-       
+       * 스크립트가 활성화될 때, 아이템 슬롯들을 가져와서 인덱스 부여
+       * IInteractable 의 OnInteract 에서 AddItem 이벤트가 발생할경우 인벤토리에 아이템 추가
+         * 아이템 추가시 아이템 슬롯의 중첩 가능여부, 비어있는 아이템창 여부를 확인
+         * 여유가 있을경우 해당 슬롯에 아이템 추가
+         * 여유가 없을경우 아이템 프리팹을 지정위치에 생성
+       * 아이템 정보 표기 UI 업데이트
+       * 아이템 사용, 장착, 장착해제, 버리기 기능 구현
+         * 소모품일 경우 사용버튼 활성화. 사용시 사용 효과 직렬화 클래스를 모두 확인후, 효과 적용
+         * 장비일경우 장착, 장착해제 버튼 활성화
+           * 장착중일경우 장착해제버튼 활성화. 장착중인 도구 프리팹을 삭제함
+           * 장착중이 아닐경우 장착버튼 활성화. 지정한 위치에 선택한 아이템의 도구 프리팹을 생성
+         * 버리기 버튼은 상시 활성화
+           * 장비중일경우, 장착 해제후 버리기
+
+      
    
