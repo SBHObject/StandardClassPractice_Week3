@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dac720267109b8a47bd905db78fc0980, type: 3}
+  m_Name: Item_Swoard
+  m_EditorClassIdentifier: 
+  displayName: "\uAC80"
+  description: 
+  type: 1
+  icon: {fileID: 21300000, guid: 4f2f320a217307a48a107491b1d17ebb, type: 3}
+  dropPrefab: {fileID: 7147716996629252186, guid: 773caaa49b4f07e4886dbefe78e49f05, type: 3}
+  canStack: 0
+  maxStackAmount: 0
+  consumables: []
+  equipPrefab: {fileID: 5376697162160354968, guid: 835974a8bbe9c25428b7ebd5f9d8bbe0, type: 3}
