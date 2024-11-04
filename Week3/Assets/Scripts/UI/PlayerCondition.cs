@@ -6,7 +6,7 @@ using UnityEngine;
 //인터페이스의 특징 : 특정 기능의 이름을 미리 정의한 뒤, 상속받은 클래스가 필수적으로 구현하게만든다.
 // - 같은 시점에 동작하지만 다른 구현내용을 사용해야할 때 사용한다.
 // - 다른 클래스여도 같은 기능을 할 필요가 있을때, 인터페이스를 사용하여 묶어줄 수 있다.
-public interface IDamageable
+public interface IDamagable
 {
     //현재는 캠프파이어로부터 플레이어가 데미지를 받는 내용만 구현되고있다.
     //NPC 등을 구현할 때, 플레이어가 NPC로부터 공격을 받거나, NPC가 플레이어로부터 공격을 받도록 만들 수 있다.
@@ -14,7 +14,7 @@ public interface IDamageable
     void TakeDamage(int damageAmount);
 }
 
-public class PlayerCondition : MonoBehaviour, IDamageable
+public class PlayerCondition : MonoBehaviour, IDamagable
 {
     public UICondition uiCondition;
 
@@ -72,5 +72,15 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     public void RestoreMana(float amount)
     {
         mana.Add(amount);
+    }
+
+    public bool UseStamina(float amount)
+    {
+        if (stamina.curValue - amount < 0)
+        {
+            return false;
+        }
+        stamina.Subtract(amount);
+        return true;
     }
 }
