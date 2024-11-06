@@ -8,7 +8,8 @@ public enum AIState
     Idle,
     Wandering,
     Attacking,
-    Fleeing
+    Fleeing,
+    Fallowing
 }
 
 public class Npc : MonoBehaviour
@@ -120,7 +121,7 @@ public class Npc : MonoBehaviour
         }
     }
 
-    void AttackingUpdate()
+    protected virtual void AttackingUpdate()
     {
         if (playerDistance > attackDistance || !IsPlayerInFieldOfView())
         {
@@ -141,11 +142,17 @@ public class Npc : MonoBehaviour
             if (Time.time - lastAttackTime > attackRate)
             {
                 lastAttackTime = Time.time;
-                CharacterManager.Instance.Player.controller.GetComponent<IDamagable>().TakeDamage(damage);
-                animator.speed = 1;
-                animator.SetTrigger("Attack");
+                Attack();
             }
         }
+    }
+
+    protected virtual void Attack()
+    {
+        CharacterManager.Instance.Player.controller.GetComponent<IDamagable>().TakeDamage(damage);
+        CharacterManager.Instance.Player.controller.GetComponent<IDamagable>().TakeDamage(damage);
+        animator.speed = 1;
+        animator.SetTrigger("Attack");
     }
 
     void FleeingUpdate()
