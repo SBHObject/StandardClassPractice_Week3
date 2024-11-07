@@ -137,6 +137,53 @@
 
 # 4주차
 
+### Q1
+
+요구사항 1 - EquipTool, Equipment, Resorce 의 기능 분석
+
+##### Equipment
+* OnAttackInput
+  - Input System을통해 공격에 할당된 키의 입력을 받습니다.
+  - 입력을 받으면 현재 장착중인 아이템을 저장한 curEquip에 저장된 Equip 클래스의 OnAttackInput 메서드를 호출합니다.
+
+* EquipNew
+  - 매개변수로 받는 ItemData의 아이템을 장착합니다.
+  - ItemData의 장착 프리팹을 Instantiate 하고, 프리팹에 붙어있는 Equip 클래스를 가져와서 curEquip에 저장합니다.
+  - 장착 전, UnEquip 메서드를 먼저 호출하여 장착한 아이템이 있을경우 장착을 해제합니다.
+
+* UnEquip
+  - 장착중인 아이템을 해제합니다.
+  - curEquip이 null 일경우 호출되도 아무런행동을 하지 않습니다
+  - 먼저 curEquip의 gameObject를 삭제한 뒤, curEquip 을 null으로 변경합니다.
+
+##### EquipTool
+* OnAttackInput()
+  - Equip 클래스의 추상 메서드를 재정의 하고 있는 메서드입니다.
+  - 현재 공격중이 아닐경우(attacking 이 false일경우), 공격중으로 플래그 변수를 바꿈니다(attacking 을 true로)
+  - 변경 전, PlayerCondition 의 UseStamina를 호출하여 스테미너의 감소를 시도합니다. 성공할경우 공격을 시작합니다.
+  - 이 무기에 붙은 애니메이터의 Attack 트리거를 활성화 합니다.
+  - attackRate 변수에 지정된 시간 후, OnCanAttack 메서드를 호출합니다.
+
+* OnCanAttack
+  - Invoke를 통해 호출됩니다.
+  - attacking 플래그 변수를 false로 변경하는 역할만을 수행합니다.
+
+* OnHit
+  - 카메라의 중앙에서 전방으로 레이를 발사합니다
+  - 이 스크립트의 doesGatherResources가 true 일경우, 레이가 충돌한 대상의 Resource 클래스의 보유여부를 확인합니다.
+  - Resource 클래스가 있을경우 해당 클래스의 Gather 메서드를 호출합니다.
+  - 이 스크립트의 doesDealDamage 가 true일경우, 레이가 충돌한 대상의 IDamagable 인터페이스 보유 여부를 확인합니다.
+  - IDamagable 인터페이스가 있을경우 해당 인터페이스의 TakeDamage() 메서드를 호출합니다.
+  - OnHit 메서드의 경우, attack 트리거를 통해 활성화된 애니메이션에서 호출됩니다.    
+
+##### Resource
+* Gather
+  - 호출될 때, 레이가 충돌한 지점과 레이의 방향을 Vector3 매개변수로 받습니다.
+  - capacity 변수를 1줄이고, 이 클래스에 저장된 ItemData의 dropPrefab 프리팹을 하나 생성합니다.
+  - 생성시 타격위치에서 y값이 1 높은 위치, z축이 플레이어를 보도록 생성합니다.
+  - 생성후, capacity가 0보다 작아졌을경우 이 클래스가 붙은 오브젝트를 파괴합니다.
+  - capacity가 0 이하일경우, 반복문을 종료합니다.
+
 ### Q2
 
 요구사항 1 - NPC의 기능 분석
@@ -203,3 +250,26 @@
   - 코루틴 함수입니다.
   - 공격을 받으면 오브젝트가 가진 모든 Mesh의 색을 붉은색으로 변경합니다.
   - 0.1 초 뒤에, 모든 Mesh의 색을 하얀색으로 다시 변경합니다.
+
+### Q3
+
+요구사항 1 - Lerp, SLerp, 근사값
+
+* 보간
+  - 데이터의 중간값을 찾는 프로세스
+* Lerp
+  - Mathf.Lerp(float, float, float)
+  - 두 값 사이의 값을 찾아서 반환
+  - 첫번째 매개변수와, 두번째 매개변수 사이의 값을 반환하며, 첫번째 매개변수에서 시작해 세번째 매개변수 만큼 떨어진 값을 반환합니다.
+* Slerp
+  - Vector3.Slerp , Quaternion.Slerp
+  - 두 점 사이의 값을 찾아서 반환
+  - Vector 의 경우, 첫번째 Vector 매개변수에서 두번째 매개변수 로 향하는 벡터중, float 매개변수 만큼 떨어진 거리의 값을 반환
+  - Quaternion 의 경우, 첫번째 매개변수에서 두번째 매개변수 향하는 각도중, float 매개변수 만큼 떨어진 거리의 값을 반환
+  - 이때 세번째 매개변수 float 값은 백분율 값으로, 1을 100%로 하는 값
+* Mathf.Approximately 를 사용하는 이유
+  - float 값은 정확한 소수점 값을 반환하지 않음
+  - 계산된 두 값이 보기에는 같아도, == 를 사용하여 비교시 약간의 오차로 인해서 두 값이 다르다는 결과를 나타낼 수 있음
+  - float 값의 오차를 무시하고 같음을 알기 위해서 사용하게됨
+  - 정의: Abs(b - a) < Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f);
+  
