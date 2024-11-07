@@ -45,11 +45,14 @@ public class Npc : MonoBehaviour
     private Animator animator;
     private SkinnedMeshRenderer[] meshRenderers;
 
+    protected AudioSource audioSource;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -143,13 +146,13 @@ public class Npc : MonoBehaviour
             {
                 lastAttackTime = Time.time;
                 Attack();
+                audioSource.PlayOneShot(audioSource.clip);
             }
         }
     }
 
     protected virtual void Attack()
     {
-        CharacterManager.Instance.Player.controller.GetComponent<IDamagable>().TakeDamage(damage);
         CharacterManager.Instance.Player.controller.GetComponent<IDamagable>().TakeDamage(damage);
         animator.speed = 1;
         animator.SetTrigger("Attack");
