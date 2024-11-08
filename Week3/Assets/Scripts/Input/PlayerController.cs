@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
         if(context.phase == InputActionPhase.Started)
         {
             inventory?.Invoke();
-            ToggleCursor(!canLook);
+            ToggleCursor(canLook);
         }
     }
 
