@@ -13,9 +13,11 @@ public class Strategy_LinearShot : IRangeAttack
 
 public class Strategy_Howitzer : IRangeAttack
 {
+    float shotPower = 5f;
     public void Attack(GameObject projectile, Transform shotPosition)
     {
-        Object.Instantiate(projectile, shotPosition.position, shotPosition.rotation);
+        GameObject shot = Object.Instantiate(projectile, shotPosition.position, shotPosition.rotation);
+        shot.GetComponent<Rigidbody>().AddForce(shotPosition.position.normalized * shotPower, ForceMode.Impulse);
     }
 }
 
