@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5360879285308417901}
   - component: {fileID: 4323266808681425372}
   m_Layer: 0
-  m_Name: Equip_RangeWeapon_Linear
+  m_Name: Equip_RangeWeapon_Howitzer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,14 +58,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2163881711419991008}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.17364825, y: 0, z: 0, w: 0.9848078}
   m_LocalPosition: {x: 0.5, y: 0, z: 0.5}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3198264088951453671}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -20, y: 0, z: 0}
 --- !u!33 &1134427028059472235
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a58d60ad7ca97d429a4a31b3d0779d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackType: 0
+  attackType: 1
   attackRate: 1
-  projectile: {fileID: 6380905759298042562, guid: a2b3c86b461919b4ca7b569a20cab577, type: 3}
+  projectile: {fileID: 4021823311071977143, guid: 65e472d146e2e124abea3e4df6d0ae14, type: 3}
   shotPosition: {fileID: 3198264088951453671}

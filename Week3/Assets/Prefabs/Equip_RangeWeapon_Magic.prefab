@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5360879285308417901}
   - component: {fileID: 4323266808681425372}
   m_Layer: 0
-  m_Name: Equip_RangeWeapon_Linear
+  m_Name: Equip_RangeWeapon_Magic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a58d60ad7ca97d429a4a31b3d0779d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackType: 0
+  attackType: 2
   attackRate: 1
   projectile: {fileID: 6380905759298042562, guid: a2b3c86b461919b4ca7b569a20cab577, type: 3}
   shotPosition: {fileID: 3198264088951453671}
