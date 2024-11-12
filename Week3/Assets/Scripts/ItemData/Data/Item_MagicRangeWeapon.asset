@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac720267109b8a47bd905db78fc0980, type: 3}
   m_Name: Item_MagicRangeWeapon
   m_EditorClassIdentifier: 
-  displayName: "\uC9C1\uC120\uD615 \uC6D0\uAC70\uB9AC \uACF5\uACA9"
+  displayName: "\uB9C8\uBC95 \uC6D0\uAC70\uB9AC \uACF5\uACA9"
   description: 
   type: 1
   icon: {fileID: 21300000, guid: 4ff1e23e5db23be4e95d2b62f7be455d, type: 3}
-  dropPrefab: {fileID: 673593388708291290, guid: 356aefa38289d1d40b8b533b651c1348, type: 3}
+  dropPrefab: {fileID: 673593388708291290, guid: 3c41c56503f76a34693a4310a6ee1d6a, type: 3}
   canStack: 0
   maxStackAmount: 1
   consumables: []
-  equipPrefab: {fileID: 2163881711419991008, guid: bb0d699bbd044a94d86b7e44852c520a, type: 3}
+  equipPrefab: {fileID: 2163881711419991008, guid: 6d75d1b88b615ec42b88174419144d66, type: 3}

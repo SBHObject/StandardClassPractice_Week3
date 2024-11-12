@@ -7,8 +7,13 @@ using UnityEngine;
 public class LinearShot : MonoBehaviour
 {
     private float moveSpeed = 5f;
-    private GameObject shoter = CharacterManager.Instance.Player.gameObject;
-    private int shotDamage;
+    private GameObject shoter;
+    private int shotDamage = 10;
+
+    private void Start()
+    {
+        shoter = CharacterManager.Instance.Player.gameObject;
+    }
 
     private void Update()
     {
@@ -33,11 +38,5 @@ public class LinearShot : MonoBehaviour
         }
 
         SelfDestroy();
-    }
-
-    public void SetShotInfo(GameObject source, int damage)
-    {
-        shoter = source;
-        shotDamage = damage;
     }
 }

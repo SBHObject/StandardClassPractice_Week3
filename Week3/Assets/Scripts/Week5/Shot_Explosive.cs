@@ -6,13 +6,12 @@ public class Shot_Explosive : MonoBehaviour
 {
     public LayerMask hitLayer;
 
-    private int shotDamage;
+    private int shotDamage = 10;
     private GameObject shoter;
 
-    public void SetShotInfo(GameObject source, int damage)
+    private void Start()
     {
-        shoter = source;
-        shotDamage = damage;
+        shoter = CharacterManager.Instance.Player.gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
