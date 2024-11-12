@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shot_Explosive : MonoBehaviour, IRangeShot
+public class Shot_Explosive : MonoBehaviour
 {
     public LayerMask hitLayer;
 

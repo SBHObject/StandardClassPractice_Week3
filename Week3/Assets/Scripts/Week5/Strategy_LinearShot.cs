@@ -41,6 +41,7 @@ public class Strategy_Magic : IRangeAttack
 
             Object.Instantiate(projectile, shotPosition.position, qShot);
             preAngle += anglePerShot;
+
         }
     }
 }

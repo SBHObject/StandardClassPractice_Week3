@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public interface IRangeShot
-{
-    public void SetShotInfo(GameObject source, int damage);
-}
 
-public class LinearShot : MonoBehaviour, IRangeShot
+public class LinearShot : MonoBehaviour
 {
     private float moveSpeed = 5f;
-    private GameObject shoter;
+    private GameObject shoter = CharacterManager.Instance.Player.gameObject;
     private int shotDamage;
 
     private void Update()

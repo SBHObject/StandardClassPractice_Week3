@@ -151,12 +151,15 @@ public class UIInventory : MonoBehaviour
         selectedItem = slots[index];
         selectedItemIndex = index;
 
-        selectedItemName.text = string.Empty;
+        selectedItemName.text = selectedItem.item.displayName;
+        selectedItemDescription.text = selectedItem.item.description;
+
+        selectedItemStatName.text = string.Empty;
         selectedItemStatValue.text = string.Empty;
 
         for(int i = 0; i < selectedItem.item.consumables.Length; i ++)
         {
-            selectedItemName.text += selectedItem.item.consumables[i].type.ToString();
+            selectedItemStatName.text += selectedItem.item.consumables[i].type.ToString();
             selectedItemStatValue.text += selectedItem.item.consumables[i].value.ToString();
         }
 
