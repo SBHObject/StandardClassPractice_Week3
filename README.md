@@ -272,4 +272,25 @@
   - 계산된 두 값이 보기에는 같아도, == 를 사용하여 비교시 약간의 오차로 인해서 두 값이 다르다는 결과를 나타낼 수 있음
   - float 값의 오차를 무시하고 같음을 알기 위해서 사용하게됨
   - 정의: Abs(b - a) < Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f);
+
+
+# 5주차
+
+### Q1
+요구사항 1 - 전략패턴을 사용하여 다양한 원거리 무기 공격패턴 제작
+
+- 직선진행 총알
+
+![직선형](https://file.notion.so/f/f/f3d7f86c-cdab-4d84-9092-b767f79f7186/daa1e8a4-fd25-4b05-a046-c669f804b4b9/2024-11-15_12-03-33_(1).gif?table=block&id=13f43507-6cd3-80fb-9d3c-ef92a4d8ed59&spaceId=f3d7f86c-cdab-4d84-9092-b767f79f7186&expirationTimestamp=1731729600000&signature=dvz_XeZDI7ppkgy3nyN64Vb1wP0xibYRelLeDz_2TW0)
+
+- 포물선을 그리며 움직이는 투척물
   
+![곡사](https://file.notion.so/f/f/f3d7f86c-cdab-4d84-9092-b767f79f7186/ba9927a8-bf46-4df8-845d-b306bc544bd4/2024-11-15_12-03-33_(2).gif?table=block&id=13f43507-6cd3-8088-86e9-f9955bba3f8d&spaceId=f3d7f86c-cdab-4d84-9092-b767f79f7186&expirationTimestamp=1731729600000&signature=Ki108KT68lds6f49GgdQMqunxjf0vYY-SE0gz8kXyEs)
+
+- 원 모양으로 퍼져나가는 마법공격
+
+![마법](https://file.notion.so/f/f/f3d7f86c-cdab-4d84-9092-b767f79f7186/b50b9b54-1b80-4ee8-8525-8927cce3fe1d/2024-11-15_12-03-33.gif?table=block&id=13f43507-6cd3-8025-834c-eeeafaa06c8a&spaceId=f3d7f86c-cdab-4d84-9092-b767f79f7186&expirationTimestamp=1731729600000&signature=jZeQw5O6rEN5QKABh1d-I-hbU7hurD0E6y4P37_l3pE)
+
+요구사항 2 - 2개이상의 스킬을 사용할 수 있고, 퀵 슬롯에 스킬을 등록하여 사용하도록 만들때 구현방식과 사용할 수 있는 디자인패턴 
+
+-
