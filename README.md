@@ -294,3 +294,14 @@
 요구사항 2 - 2개이상의 스킬을 사용할 수 있고, 퀵 슬롯에 스킬을 등록하여 사용하도록 만들때 구현방식과 사용할 수 있는 디자인패턴 
 
 -
+
+
+# 6주차
+
+### Q1 
+확장문제 : 일시정지 버튼
+
+![일시정지](https://laced-rutabaga-712.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Ff3d7f86c-cdab-4d84-9092-b767f79f7186%2F85f185d4-1696-4370-b161-f5807fcfa813%2F%25EC%258A%25A4%25ED%2581%25AC%25EB%25A6%25B0%25EC%2583%25B7(1210).png?table=block&id=14243507-6cd3-80be-9d73-e4d8c1ea4c89&spaceId=f3d7f86c-cdab-4d84-9092-b767f79f7186&width=1360&userId=&cache=v2)
+
+- P 키를 누르면 옵션창이 열리며 일시정지
+- 옵션창이 열려있는 상태에서 P를 다시눌러서 일시정지를 해제하거나, Resume Game 버튼을 눌러 일시정지 해제 가능
