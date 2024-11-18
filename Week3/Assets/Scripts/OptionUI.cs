@@ -14,5 +14,20 @@ public class OptionUI : MonoBehaviour
     public void ToggleUI(bool active)
     {
         optionUIObject.SetActive(active);
+
+        if(active == true)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
+
+    public void ClickResumeButton()
+    {
+        ToggleUI(false);
+        CharacterManager.Instance.Player.controller.ToggleCursor(false);
     }
 }
